@@ -1,0 +1,19 @@
+[Unit]
+Description=CAN Bus and GPS Logging Service
+After=bluetooth.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+Environment="PYTHONPATH={{pwd}}"
+Environment=PATH=/home/pi/.pyenv/versions/3.6.1/bin:$PATH
+WorkingDirectory={{pwd}}
+ExecStart={{pwd}}/rpi_can_logger/main.py --conf {{pwd}}/{{conf}}
+StandardOutput=journal
+StandardError=journal
+Restart=always
+#RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

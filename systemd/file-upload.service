@@ -1,0 +1,22 @@
+[Unit]
+Description=Attempt to Upload Remaining Log Files to MongoDB
+After=syslog.target
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+Environment="PYTHONPATH={{pwd}}"
+Environment=PATH=/home/pi/.pyenv/versions/3.6.1/bin:$PATH
+WorkingDirectory={{pwd}}
+ExecStart={{pwd}}/rpi_can_logger/uploaders/api_upload.py
+StandardOutput=journal
+StandardError=journal
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=network-online.target

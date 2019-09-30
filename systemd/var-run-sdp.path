@@ -1,0 +1,9 @@
+[Unit]
+Description=Monitor /var/run/sdp
+
+[Install]
+WantedBy=bluetooth.service
+
+[Path]
+PathExists=/var/run/sdp
+Unit=var-run-sdp.service
